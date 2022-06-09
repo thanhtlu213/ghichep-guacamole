@@ -1,0 +1,4 @@
+create database guacamole_db;
+create user 'guacamole_user'@'%' identified by 'Chivas#12345';
+GRANT SELECT,INSERT,UPDATE,DELETE ON guacamole_db.* TO 'guacamole_user'@'%';
+flush privileges;

@@ -1,0 +1,31 @@
+Fix lỗi khi cài đặt mysql – ERROR 1045 (28000): Access denied for user ‘root’@’localhost’ (using password: YES)
+
+sudo nano /etc/mysql/my.cnf
+[mysqld]
+# For debugging and recovery only #
+skip-grant-tables
+skip-networking
+
+Link: 
+https://unix.stackexchange.com/questions/58655/turn-off-skip-grant-tables-in-mysql
+https://stackoverflow.com/questions/21944936/error-1045-28000-access-denied-for-user-rootlocalhost-using-password-y
+https://blog.codegym.vn/2020/10/22/fix-loi-error-1045-28000-access-denied-for-user-rootlocalhost-using-password-yes/
+
+------------------------------------------------------------------
+
+Lỗi: ERROR 1290 (HY000): The MariaDB server is running with the --skip-grant-tables option so it cannot execute this statement
+FLUSH PRIVILEGES;
+GRANT ALL PRIVILEGES ON *.* TO 'guacamole'@'localhost';
+
+
+
+Lỗi: Host 'xxx.xx.xxx.xxx' is not allowed to connect to this MySQL server
+https://stackoverflow.com/questions/1559955/host-xxx-xx-xxx-xxx-is-not-allowed-to-connect-to-this-mysql-server
+mysql -h 123.238.18.47 -u rakman -p
+mysql> CREATE USER 'monty'@'localhost' IDENTIFIED BY 'some_pass';
+mysql> GRANT ALL PRIVILEGES ON *.* TO 'monty'@'localhost'
+    ->     WITH GRANT OPTION;
+mysql> CREATE USER 'monty'@'%' IDENTIFIED BY 'some_pass';
+mysql> GRANT ALL PRIVILEGES ON *.* TO 'monty'@'%'
+    ->     WITH GRANT OPTION;
+

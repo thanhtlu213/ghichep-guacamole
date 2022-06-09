@@ -1,0 +1,56 @@
+version: "3"
+services:
+  guacd:
+    image: "guacamole/guacd"
+    container_name: guacd
+    hostname: guacd
+    restart: always
+    volumes:
+      - "/data/shared/guacamole/guacd/data:/data"
+      - "/data/shared/guacamole/guacd/conf:/conf:ro"
+    expose:
+      - "4822"
+    ports:
+      - "4822:4822"
+    network_mode: bridge
+
+  guacamole:
+    image: "guacamole/guacamole"
+    container_name: guacamole
+    hostname: guacamole
+    restart: always
+    volumes:
+      - "/data/shared/guacamole/guacamole/guac-home:/data"
+      - "/data/shared/guacamole/guacamole/conf:/conf:ro"
+    expose:
+      - "8080"
+    ports:
+      - "8088:8080"
+    network_mode: bridge
+    environment:
+      - "GUACD_HOSTNAME=Guacamole"
+      - "GUACD_PORT=4822"
+      - "MYSQL_HOSTNAME=mysql"
+      - "MYSQL_PORT=3306"
+      - "GUACAMOLE_HOME=/data"
+    depends_on:
+      - db
+      - guacd
+      
+  db:
+    image: mysql:5.7
+    volumes:
+      - db_data:/var/lib/mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: 123@123as
+      MYSQL_DATABASE: Guacamole
+      MYSQL_USER: guacamole
+      MYSQL_PASSWORD: 123@123a
+    expose:
+      - "3306"
+    ports:
+      - "3306:3306"
+
+volumes:
+  db_data: {}

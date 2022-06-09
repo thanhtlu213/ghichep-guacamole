@@ -1,0 +1,4 @@
+https://github.com/MysticRyuujin/guac-install
+
+
+https://github.com/Zer0CoolX/guacamole-install-rhel-7

@@ -1,0 +1,11 @@
+find / -name *guacamole*
+/var/lib/docker/overlay2/8435b68bf028b8ff3acb28607e9e9333746f0d6f08efc934e0847eca66fc1b41/merged/root/.guacamole/guacamole.properties
+
+backup:
+mysqldump -uroot -p -h 172.17.0.3 guacamole_db > guacamole_db.sql
+pass: Chivas#12345
+
+restore:
+mysql -uroot -p guacamole_db < 'guacamole_db.sql'
+pass: Chivas#12345
+
